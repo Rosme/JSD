@@ -7,3 +7,6 @@ def Foo():
 
 def Bob():
     print(444)
+
+def LOP():
+    print(2323)
