@@ -4,6 +4,6 @@
 def yourmom():
   x = 1
   while x:
-    print x
+    print (x)
 
 yourmom()
