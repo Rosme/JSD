@@ -19,3 +19,6 @@ def aaaa():
     
 def lsd():
     print("BBB")
+
+def bbb():
+    print("BB")
