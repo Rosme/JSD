@@ -10,3 +10,6 @@ def Bob():
 
 def LOP():
     print(2323)
+
+def JJJ():
+    print(100)
