@@ -16,3 +16,6 @@ def JJJ():
     
 def aaaa():
     print(40)
+
+def bbb():
+    print("BB")
