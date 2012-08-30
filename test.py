@@ -13,3 +13,6 @@ def LOP():
 
 def JJJ():
     print(100)
+    
+def aaaa():
+    print(40)
