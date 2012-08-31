@@ -1,27 +1,34 @@
-########################################
-#AUTEUR: David, Samuel, Jean-Sebastien
-#TITRE: REDSQUARE
-#DATE DE REMISE: 30 AOUT 2012
-########################################
-
 from tkinter import *
 
 class RenduCarte():
 
-    def __init__(self, parent = None):
-        return None
-        
-    def affichePanel(self):
+    def __init__(self):
+        return None                 ###
+    
+    def afficherFormes(self):
+        return None                 ###
+    
+    def dessinerPanel(self):
         frame = Frame(width=400, height=400, colormap="new")
         frame.pack() 
     
-    def afficheJeux(self):
+    def afficherCarte(self):
         fenetre = Tk()
-        rc.affichePanel()
+        rc.dessinerPanel()
         fenetre.mainloop()
-         
-
-if __name__ == '__main__':
-    rc = RenduCarte()
-    rc.afficheJeux()
+        
+class RenduInterface():
     
+    def __init__(self):
+        return None                 ###
+    
+    def afficherBouton(self):
+        return None
+    
+    def afficherInfo(self):
+        return None
+
+
+if __name__ == '__main__':          #pour tester main
+    rc = RenduCarte()
+    rc.afficherCarte()
