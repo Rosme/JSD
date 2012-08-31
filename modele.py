@@ -6,3 +6,6 @@ class Bornes():
         self.y = y
         self.longueur = longueur
         self.hauteur = hauteur
+        
+class Formes():
+    def __init__(self):
