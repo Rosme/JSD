@@ -8,6 +8,15 @@ class Bornes():
 class Formes():
     def __init__(self):
         
+    def getBornes(self):
+        
+    def getCouleur(self):
+        
+    def update(self):
+        
+    def mouvement(self):
+        
+        
 class RedSquare():
     def __init__(self):
         self.x = 50 #position x du RedSquare au départ (à modifier eventuellement)
@@ -18,7 +27,7 @@ class RedSquare():
     def getBornes(self):
         self.bornesRS = Bornes(x, y, longueur, hauteur) #RS pour RedSquare (abréviation)
         
-    def deplacer(x, y):
+    def deplacer(self, x, y):
         #bornesRS.x = get coordonnée x de la souris
         #bornesRS.y = get coordonnée y de la souris
         
