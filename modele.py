@@ -1,4 +1,3 @@
-
 class Bornes():
     def __init__(self, x, y, longueur, hauteur):
         self.x = x
@@ -17,7 +16,7 @@ class RedSquare():
         self.hauteur = 20 #largeur du RedSquare        
         
     def getBornes(self):
-        self.bornesRS = Bornes(x, y, longueur, hauteur) #RS pour RedSquare (abréviation)
+        self.bornesRS = Bornes(self.x, self.y, self.longueur, self.hauteur) #RS pour RedSquare (abréviation)
         
     def deplacer(x, y):
         #bornesRS.x = get coordonnée x de la souris
