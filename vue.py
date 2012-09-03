@@ -23,25 +23,31 @@ class RenduCarte():
     
     def afficherCarte(self):                            #Permet d'afficher les widgets du jeux et de packer les widgets
         self.fenetre = Tk()
-        rc.panelPrincipal()
-        rc.panelSecondaire()
+        self.fenetre.title("RedSquare - Projet B41")
+        self.panelPrincipal()
+        self.panelSecondaire()
         self.FenetrePrincipal.pack()
         self.FenetreSecondaire.place(in_=self.FenetrePrincipal, anchor="c", relx=.4, rely=.4)
-        rc.centrerFenetre()
-        self.fenetre.mainloop()
+        self.centrerFenetre()
         
 class RenduInterface():
     
     def __init__(self):
-        return None                 
-    
-    def afficherBouton(self):
         return None
     
-    def afficherInfo(self):
+    def bouttonQuitter(self):
+        self.BouttonQuitter = Button(rc.FenetrePrincipal, text = "Quitter", bg = "white", command = rc.FenetrePrincipal.quit)
+        #self.BouttonQuitter.pack()                    #A revoir, quand pack() change l'interface et bouton ne s'affiche pas
+    
+    def bouttonInfo(self):
         return None
+    
+    def afficherBoutton(self):
+        self.bouttonQuitter()
 
-
-if __name__ == '__main__':          #pour tester main
+if __name__ == '__main__':         
     rc = RenduCarte()
+    ri = RenduInterface()
     rc.afficherCarte()
+    ri.afficherBoutton()
+    rc.fenetre.mainloop()       #Demarre le gestionnaire d'evenements
