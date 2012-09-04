@@ -50,7 +50,6 @@ class Formes():
         if(self.directionX == 0):
             if(self.x == 0):                      #verification si la figure n'est pas sur le cote gauche du cadre (0,y)
                 directionX = 1                    #si oui, changement de direction de -x a +x 
-                self.x += self.movementSpeedX     #donc deplacement a droite
             else:                                 #sinon pas a gauche du cadre
                 self.x -= self.movementSpeedX     #continue de deplacer a gauche
         
@@ -58,7 +57,6 @@ class Formes():
         elif(self.directionX == 1):
             if((self.x+self.longueur) == self.interfaceDimension): 
                 directionX = 0
-                self.x -= self.movementSpeedX
             else:
                 self.x += self.movementSpeedX
         
@@ -66,7 +64,6 @@ class Formes():
         if(self.directionY == 0):
             if(self.y == 0):
                 directionY = 1
-                self.y += self.movementSpeedY
             else:
                 self.y -= self.movementSpeedY
                 
@@ -74,7 +71,6 @@ class Formes():
         elif(self.directionY == 1):
             if((self.y+self.hauteur) == self.interfaceDimension):
                 directionY = 0
-                self.y -= self.movementSpeedY
             else:
                 self.y += self.movementSpeedY
                 
