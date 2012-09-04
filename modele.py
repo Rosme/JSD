@@ -3,7 +3,7 @@ modele.py
 Fichier contenant les classes modeles du RedSquare
 Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
 '''
-
+import random
 import time
 import datetime
 
@@ -15,29 +15,79 @@ class Bornes():
         self.hauteur = hauteur
         
 class Formes():
-    def __init__(self):
-        None
+    def __init__(self, x, y, longueur, hauteur, couleur):
+        self.x = x
+        self.y = y
+        self.longueur = longueur
+        self.hauteur = hauteur
+        self.couleur = couleur
+        self.bornesFig = Bornes(self.x, self.y, self.longueur, self.hauteur)
+        
+        #inisialisation de la direction de depart
+        '''si x = 0 deplacement a gauche (-x)
+           si x = 1 deplacement a droite (+x)
+           idem pour y                            '''
+        self.directionX = random.randrange(2) #methodes random: retourne soit 0 ou 1
+        self.directionY = random.randrange(2)
         
     def getBornes(self):
-        None
+        return self.bornesFig
         
     def getCouleur(self):
-        None
+        return self.couleur
         
     def update(self):
         None
         
     def mouvement(self):
-        None
+        # !!! les vitesses de deplacement sont a modifier !!! 
+        self.movementSpeedX = 1
+        self.movementSpeedY = 1
         
+        self.interfaceDimension = 400 #j'assume que notre interface de jeu est de 400x400
+        
+        #directionX == 0 donc -x deplacement a gauche
+        if(self.directionX == 0):
+            if(self.x == 0):                      #verification si la figure n'est pas sur le cote gauche du cadre (0,y)
+                directionX = 1                    #si oui, changement de direction de -x a +x 
+                self.x += self.movementSpeedX     #donc deplacement a droite
+            else:                                 #sinon pas a gauche du cadre
+                self.x -= self.movementSpeedX     #continue de deplacer a gauche
+        
+        #directionX == 1 donc +x deplacement vers la droite
+        elif(self.directionX == 1):
+            if(self.x == self.interfaceDimension): 
+                directionX = 0
+                self.x -= self.movementSpeedX
+            else:
+                self.x += self.movementSpeedX
+        
+        #directionY == 0 donc  -y deplacement vers le bas
+        if(self.directionY == 0):
+            if(self.y == 0):
+                directionY = 1
+                self.y += self.movementSpeedY
+            else:
+                self.y -= self.movementSpeedY
+                
+        #directionY == 1 donc +y deplacement vers le haut
+        elif(self.directionY == 1):
+            if(self.y == self.interfaceDimension):
+                directionY = 0
+                self.y -= self.movementSpeedY
+            else:
+                self.y += self.movementSpeedY
+                
 class RedSquare():
     def __init__(self):
-        self.bornesRS = Bornes(50, 50, 20, 20)        
+        self.bornesRS = Bornes(100, 100, 20, 20)
+        self.couleur = "RED"      
         
     def getBornes(self):
-        #self.bornesRS = Bornes(x, y, longueur, hauteur) #RS pour RedSquare (abreviation)
         return self.bornesRS
-        
+    
+    def getCouleur(self):
+        return self.couleur
         
     def deplacer(self, x, y):
         bornesRS.x = x
