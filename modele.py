@@ -1,3 +1,9 @@
+'''
+modele.py
+Fichier contenant les classes modeles du RedSquare
+Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
+'''
+
 class Bornes():
     def __init__(self, x, y, longueur, hauteur):
         self.x = x
@@ -7,15 +13,19 @@ class Bornes():
         
 class Formes():
     def __init__(self):
+        None
         
     def getBornes(self):
+        None
         
     def getCouleur(self):
+        None
         
     def update(self):
+        None
         
     def mouvement(self):
-        
+        None
         
 class RedSquare():
     def __init__(self):
@@ -35,3 +45,5 @@ class RedSquare():
     def deplacer(self, x, y):
         bornesRS.x = x
         bornesRS.y = y
+        
+            
