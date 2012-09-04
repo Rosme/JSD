@@ -4,6 +4,9 @@ Fichier contenant les classes modeles du RedSquare
 Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
 '''
 
+import time
+import datetime
+
 class Bornes():
     def __init__(self, x, y, longueur, hauteur):
         self.x = x
@@ -29,12 +32,6 @@ class Formes():
         
 class RedSquare():
     def __init__(self):
-        '''
-        self.x = 50 #position x du RedSquare au depart (A  modifier eventuellement)
-        self.y = 50 #position y du RedSquare au depart (A  modifier eventuellement)
-        self.longueur = 20 #longueur du RedSquare
-        self.hauteur = 20 #largeur du RedSquare
-        '''
         self.bornesRS = Bornes(50, 50, 20, 20)        
         
     def getBornes(self):
@@ -46,4 +43,28 @@ class RedSquare():
         bornesRS.x = x
         bornesRS.y = y
         
+class Temps():
+    def __init__(self):
+        self.running = False
+        self.timeStart = None
+        self.time = None
+    
+    #Demarre le temps
+    def start(self):
+        if self.running == False:
+            self.timeStart = datetime.datetime.now()
+            self.running = True
+    
+    #Arrete le temps
+    def stop(self):
+        if self.running:
+            self.time = datetime.datetime.now() - self.timeStart
+            self.running = False
             
+    #Retourne un string du nombre de secondes ecoule
+    def getTemps(self):
+        if self.running:
+            self.time = datetime.datetime.now() - self.timeStart
+            return str(self.time.seconds)
+        else:
+            return str(self.time.seconds)
