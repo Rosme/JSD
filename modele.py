@@ -56,7 +56,7 @@ class Formes():
         
         #directionX == 1 donc +x deplacement vers la droite
         elif(self.directionX == 1):
-            if(self.x == self.interfaceDimension): 
+            if((self.x+self.longueur) == self.interfaceDimension): 
                 directionX = 0
                 self.x -= self.movementSpeedX
             else:
@@ -72,7 +72,7 @@ class Formes():
                 
         #directionY == 1 donc +y deplacement vers le haut
         elif(self.directionY == 1):
-            if(self.y == self.interfaceDimension):
+            if((self.y+self.hauteur) == self.interfaceDimension):
                 directionY = 0
                 self.y -= self.movementSpeedY
             else:
