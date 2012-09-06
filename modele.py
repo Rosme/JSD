@@ -6,7 +6,8 @@ Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
 ##-*- coding: ISO-8859-1 -*-
 import random
 import time
-import datetime
+import random as rd
+import controlleur
 
 class Bornes():
     def __init__(self, x, y, longueur, hauteur):
@@ -37,15 +38,12 @@ class Formes():
     def getCouleur(self):
         return self.couleur
         
-    def update(self):
-        None
-        
     def mouvement(self):
         # !!! les vitesses de deplacement sont a modifier !!! 
         self.movementSpeedX = 1
         self.movementSpeedY = 1
         
-        self.interfaceDimension = 400 #j'assume que notre interface de jeu est de 400x400
+        self.interfaceDimension = 375 #j'assume que notre interface de jeu est de 400x400
         
         #directionX == 0 donc -x deplacement a gauche
         if(self.directionX == 0):
@@ -77,7 +75,7 @@ class Formes():
                 
 class RedSquare():
     def __init__(self):
-        self.bornesRS = Bornes(200, 150, 250, 200)
+        self.bornesRS = Bornes(200, 150, 50, 50)
         self.couleur = "red"      
         
     def getBornes(self):
@@ -87,8 +85,8 @@ class RedSquare():
         return self.couleur
         
     def deplacer(self, x, y):
-        bornesRS.x = x
-        bornesRS.y = y
+        self.bornesRS.x = x
+        self.bornesRS.y = y
         
 class Temps():
     def __init__(self):
@@ -151,12 +149,31 @@ class Niveau():
         self.formes = list()
     
     def getFormes(self):
-        for i in range(4):
-            self.formes.append(Formes(randint(10,375), randint(10, 300), randint(50,300), randint(50, 300), "blue"))
-        return self.formes()
+        self.formes.append(Formes(10, 10, 50, 50, "blue"))
+        self.formes.append(Formes(10, 300, 50, 50, "blue"))
+        self.formes.append(Formes(300, 200, 50, 50, "blue"))
+        self.formes.append(Formes(250, 20, 50, 50, "blue"))
+        return self.formes
+    
+    def getRouge(self):
+        return self.rouge
     
     def nouveau(self):
         self.lvl += 1
         self.formes = list()
         return getFormes()
             
+class Carte():
+    def __init__(self):
+        self.niveau = Niveau()
+        self.bornes = Bornes(0, 0, 375, 375)
+    
+    def getBornes(self):
+        return self.bornes
+    
+    def getNiveau(self):
+        return self.niveau
+    
+if __name__ == '__main__':       
+    j = controlleur.Jeu()
+    j.run()         
