@@ -59,14 +59,15 @@ class RenduCarte():
 class RenduOption():
     
     def __init__(self, parent):
+        self.parent = parent
         self.bouttonInfo=Button(parent.fenBoutton, text="Informations", padx=60, command=self.afficherInfo)
         self.bouttonQuit=Button(parent.fenBoutton, text="Quitter", padx=60, command=parent.root.quit)
      
     ###Permet d'afficher le temps écoulé   
     def afficheTemps(self):
-        return None
-        
-    
+        temps = str(self.parent.niveau.getTemps().getTemps())
+        parent.canvasTemps.create_text(50,50,text=temps)
+
     
     ###Affiche les informations si l'utilisateur clique sur le bouton informations. fonction de la command du boutton    
     def afficherInfo(self):
@@ -88,7 +89,7 @@ class RenduInterface():
         self.redsquare = self.niveau.getRouge()
         self.fenPrincipale=Frame(width=600, height=600, bd = 2, colormap="new", relief = 'groove', bg = "black")    #contient frame du jeux, bouton et eventuellement frame pour highscore
         self.fenBoutton=Frame(bd=2, colormap="new")
-        self.fenTemps=Frame(width=100, height=25,colormap="new")
+        self.canvasTemps=Canvas(width=100, height=25, bd=2)
         self.rcCarte = RenduCarte(self, self.redsquare, self.formes)
         self.option = RenduOption(self)
         self.alive = True
@@ -97,9 +98,10 @@ class RenduInterface():
         self.centrerFenetre()
         self.fenPrincipale.pack()
         self.fenBoutton.place(in_=self.fenPrincipale,relx=.1, rely=.8)
-        self.fenTemps.place(in_=self.fenPrincipale,relx=.1, rely=.9)
+        self.canvasTemps.place(in_=self.fenPrincipale,relx=.1, rely=.9)
         self.rcCarte.afficherCarte()
         self.option.afficherBouton()
+        self.option.afficheTemps()
         self.update()
         self.root.mainloop()
         
