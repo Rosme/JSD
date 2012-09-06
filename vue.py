@@ -9,12 +9,9 @@ from tkinter import messagebox
 
 class RenduCarte():
 
-    def __init__(self):
-        self.root = Tk()  
-        self.root.title("RedSquare - Projet B41")  
-        self.fenPrincipale=Frame(width=600, height=500, bd = 2, colormap="new", relief = 'groove', bg = "black")    #contient frame du jeux, bouton et eventuellement frame pour highscore
+    def __init__(self, parent):
+        self.parent = parent
         self.aireJeux=Canvas(width=450,height=370, bd=2, bg="white")            #contient le jeux
-        self.fenBoutton=Frame(bd=2, colormap="new")
 
     ###Dessine les rectangles (ennemies) dans le canvas
     def dessinerFormes(self):
@@ -29,28 +26,15 @@ class RenduCarte():
     
     ###Permet d'afficher les widgets du jeux et de packer les widgets   
     def afficherFenetre(self):                   
-        renduOption = RenduOption()
-        self.centrerFenetre()
-        self.fenPrincipale.pack()
-        self.aireJeux.place(in_=self.fenPrincipale, anchor="c", relx=.4, rely=.4)
+        self.aireJeux.place(in_=self.parent.fenPrincipale, anchor="c", relx=.4, rely=.4)
         self.dessinerFormes()
         self.dessinerRedsquare()
-        self.fenBoutton.place(in_=self.fenPrincipale,relx=.1, rely=.8) 
-        renduOption.afficherBouton()
-        
-    ###Permet de centrer l'application au centre de l'ecran
-    def centrerFenetre(self,w=600, h=500):              
-        ws = self.root.winfo_screenwidth()
-        hs = self.root.winfo_screenheight()
-        x = (ws/2) - (w/2)    
-        y = (hs/2) - (h/2)
-        self.root.geometry('%dx%d+%d+%d' % (w, h, x, y))                
         
 class RenduOption():
     
-    def __init__(self):
-        self.bouttonInfo=Button(renduCarte.fenBoutton, text="Informations", padx=60, command=self.afficherInfo)
-        self.bouttonQuit=Button(renduCarte.fenBoutton, text="Quitter", padx=60, command=renduCarte.root.quit)
+    def __init__(self, parent):
+        self.bouttonInfo=Button(parent.fenBoutton, text="Informations", padx=60, command=self.afficherInfo)
+        self.bouttonQuit=Button(parent.fenBoutton, text="Quitter", padx=60, command=parent.root.quit)
     
     
     ###Affiche les informations si l'utilisateur clique sur le bouton informations. fonction de la command du boutton    
@@ -61,7 +45,33 @@ class RenduOption():
     def afficherBouton(self):
         self.bouttonInfo.pack(side=LEFT)
         self.bouttonQuit.pack(side=LEFT)
-
+        
+class RenduInterface():
+    
+    def __init__(self, parent):
+        self.root = Tk()
+        self.root.title("RedSquare - Projet B41")
+        self.fenPrincipale=Frame(width=600, height=500, bd = 2, colormap="new", relief = 'groove', bg = "black")    #contient frame du jeux, bouton et eventuellement frame pour highscore
+        self.fenBoutton=Frame(bd=2, colormap="new")
+        self.carte = RenduCarte(self)
+        self.option = RenduOption(self)
+        
+    def dessiner(self):
+        self.centrerFenetre()
+        self.fenPrincipale.pack()
+        self.fenBoutton.place(in_=self.fenPrincipale,relx=.1, rely=.8)
+        self.carte.afficherFenetre()
+        self.option.afficherBouton()    
+        self.root.mainloop()
+        
+    ###Permet de centrer l'application au centre de l'ecran
+    def centrerFenetre(self,w=600, h=500):              
+        ws = self.root.winfo_screenwidth()
+        hs = self.root.winfo_screenheight()
+        x = (ws/2) - (w/2)    
+        y = (hs/2) - (h/2)
+        self.root.geometry('%dx%d+%d+%d' % (w, h, x, y))
+    
 if __name__ == '__main__':       
     renduCarte = RenduCarte()     
     renduOption = RenduOption()
