@@ -13,26 +13,35 @@ class RenduCarte():
         self.root = Tk()  
         self.root.title("RedSquare - Projet B41")  
         self.fenPrincipale=Frame(width=600, height=500, bd = 2, colormap="new", relief = 'groove', bg = "black")    #contient frame du jeux, bouton et eventuellement frame pour highscore
-        self.aireJeux=Canvas(width=450,height=370, bd=2, bg="white")            #contient le jeux
-        self.fenBoutton=Frame(bd=2, colormap="new")
-
+        self.canvas=Canvas(width=450,height=370, bd=2, bg="white")            #contient le jeux
+        self.fenBoutton=Frame(bd=2, colormap="new")             
+        
     ###Dessine les rectangles (ennemies) dans le canvas
     def dessinerFormes(self):
-        self.rectangleHautGauche = self.aireJeux.create_rectangle(10,10,60,125, fill="blue")
-        self.rectangleBasGauche = self.aireJeux.create_rectangle(10,300,150,350, fill="blue")
-        self.rectangleBasDroite = self.aireJeux.create_rectangle(390,350,440,200, fill="blue")
-        self.rectangleHautDroite = self.aireJeux.create_rectangle(250,20,440,70, fill="blue")
+        self.rectangleHautGauche = self.canvas.create_rectangle(10,10,60,125, fill="blue")
+        self.rectangleBasGauche = self.canvas.create_rectangle(10,300,150,350, fill="blue")
+        self.rectangleBasDroite = self.canvas.create_rectangle(390,350,440,200, fill="blue")
+        self.rectangleHautDroite = self.canvas.create_rectangle(250,20,440,70, fill="blue")
     
     ###Dessinge le redsquare dans le canvas
     def dessinerRedsquare(self):
-        self.redsquare = self.aireJeux.create_rectangle(200,150,250,200, fill="red") 
-    
+        self.redsquare = self.canvas.create_rectangle(200,150,250,200, fill="red") 
+        self.canvas.bind("<B1-Motion>", self.deplacerRedsquare)
+           
+    ###Permet de deplacer le redsquare
+    def deplacerRedsquare(self, event):
+        self.canvas.delete(self.redsquare)
+        x = event.x
+        y = event.y
+        self.redsquare = self.canvas.create_rectangle(x-25,y-25,x+25,y+25, fill = "red")
+        self.canvas.update()
+        
     ###Permet d'afficher les widgets du jeux et de packer les widgets   
     def afficherFenetre(self):                   
         renduOption = RenduOption()
         self.centrerFenetre()
         self.fenPrincipale.pack()
-        self.aireJeux.place(in_=self.fenPrincipale, anchor="c", relx=.4, rely=.4)
+        self.canvas.place(in_=self.fenPrincipale, anchor="c", relx=.4, rely=.4)
         self.dessinerFormes()
         self.dessinerRedsquare()
         self.fenBoutton.place(in_=self.fenPrincipale,relx=.1, rely=.8) 
@@ -55,7 +64,7 @@ class RenduOption():
     
     ###Affiche les informations si l'utilisateur clique sur le bouton informations. fonction de la command du boutton    
     def afficherInfo(self):
-        messagebox.showinfo("Informations", "Developpe par :\nJean-Sebatien Fauteux\nSamuel Ryc\nDavid Lebrun")
+        messagebox.showinfo("Informations", "Developpe par :\n\nJean-Sebatien Fauteux\n\nSamuel Ryc\n\nDavid Lebrun")
         
     ###Affiche les bouton a partir de afficherFenetre dans RenduCarte()
     def afficherBouton(self):
