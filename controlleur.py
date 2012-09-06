@@ -10,12 +10,29 @@ import vue
 
 class Jeu():
     def __init__(self):
-        self.interface = vue.RenduInterface(self)
-        self.interface.setData(self.rouge, self.forme)
+        self.carte = modele.Carte()
+        self.niveau = self.carte.getNiveau()
+        self.gc = modele.GerantCollision()
+        self.interface = vue.RenduInterface(self, self.niveau.getRouge(), self.niveau.getFormes())
     
     def run(self):
         self.interface.dessiner()
+    
+    def update(self):
+        if self.gc.collisionExterieur(self.niveau.getRouge().getBornes(), self.carte.getBornes()):
+            self.interface.gameOver()
         
+        for forme in self.niveau.getFormes():
+            if self.gc.collisionForme(self.niveau.getRouge().getBornes(), forme.getBornes()):
+                self.interface.gameOver()
+            forme.mouvement()
+        
+        
+        self.interface.root.after(20, self.update)
+    
+    def reset(self):
+        self.carte = modele.Carte()
+        self.niveau = self.carte.getNiveau()
     
 if __name__ == '__main__':
     j = Jeu()
