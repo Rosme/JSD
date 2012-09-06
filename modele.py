@@ -40,38 +40,38 @@ class Formes():
         
     def mouvement(self):
         # !!! les vitesses de deplacement sont a modifier !!! 
-        self.movementSpeedX = 1
-        self.movementSpeedY = 1
+        self.movementSpeedX = 10
+        self.movementSpeedY = 10
         
-        self.interfaceDimension = 375 #j'assume que notre interface de jeu est de 400x400
+        self.interfaceDimension = 375 #j'assume que notre interface de jeu est de 375x375
         
         #directionX == 0 donc -x deplacement a gauche
         if(self.directionX == 0):
-            if(self.x == 0):                      #verification si la figure n'est pas sur le cote gauche du cadre (0,y)
+            if(self.x <= 0):                      #verification si la figure n'est pas sur le cote gauche du cadre (0,y)
                 directionX = 1                    #si oui, changement de direction de -x a +x 
             else:                                 #sinon pas a gauche du cadre
-                self.x -= self.movementSpeedX     #continue de deplacer a gauche
+                self.bornesFig.x -= self.movementSpeedX     #continue de deplacer a gauche
         
         #directionX == 1 donc +x deplacement vers la droite
         elif(self.directionX == 1):
-            if((self.x+self.longueur) == self.interfaceDimension): 
+            if((self.x+self.longueur) >= self.interfaceDimension): 
                 directionX = 0
             else:
-                self.x += self.movementSpeedX
+                self.bornesFig.x += self.movementSpeedX
         
         #directionY == 0 donc  -y deplacement vers le bas
         if(self.directionY == 0):
-            if(self.y == 0):
+            if(self.y <= 0):
                 directionY = 1
             else:
-                self.y -= self.movementSpeedY
+                self.bornesFig.y -= self.movementSpeedY
                 
         #directionY == 1 donc +y deplacement vers le haut
         elif(self.directionY == 1):
-            if((self.y+self.hauteur) == self.interfaceDimension):
+            if((self.y+self.hauteur) >= self.interfaceDimension):
                 directionY = 0
             else:
-                self.y += self.movementSpeedY
+                self.bornesFig.y += self.movementSpeedY
                 
 class RedSquare():
     def __init__(self):
@@ -150,9 +150,9 @@ class Niveau():
     
     def getFormes(self):
         self.formes.append(Formes(10, 10, 50, 50, "blue"))
-        self.formes.append(Formes(10, 300, 50, 50, "blue"))
-        self.formes.append(Formes(300, 200, 50, 50, "blue"))
-        self.formes.append(Formes(250, 20, 50, 50, "blue"))
+        #self.formes.append(Formes(10, 300, 50, 50, "blue"))
+        #self.formes.append(Formes(300, 200, 50, 50, "blue"))
+        #self.formes.append(Formes(250, 20, 50, 50, "blue"))
         return self.formes
     
     def getRouge(self):

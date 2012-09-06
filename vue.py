@@ -19,17 +19,15 @@ class RenduCarte():
         self.canvas=Canvas(width=375,height=375, bd=2, bg="white")            #contient le jeux
         borneRedSquare = redsquare.getBornes()
         self.rouge = self.canvas.create_rectangle(borneRedSquare.x,borneRedSquare.y,borneRedSquare.x+borneRedSquare.longueur,borneRedSquare.y+borneRedSquare.hauteur, fill=redsquare.getCouleur())
-        #self.canvas.delete(self.rouge)
-        #self.canvas.update() 
 
     ###Dessine les rectangles (ennemies) dans le canvas
     def dessinerFormes(self):
         for f in self.bleu:
             self.canvas.delete(f)
         
-        for f in self.formes:
-            borne = f.getBornes()
-            self.bleu.append(self.canvas.create_rectangle(borne.x, borne.y, borne.x+borne.longueur, borne.y+borne.hauteur, fill=f.getCouleur()))
+        for fo in self.formes:
+            borne = fo.getBornes()
+            self.bleu.append(self.canvas.create_rectangle(borne.x, borne.y, borne.x+borne.longueur, borne.y+borne.hauteur, fill=fo.getCouleur()))
         
         self.canvas.update()
     
@@ -39,20 +37,18 @@ class RenduCarte():
     
         ###Permet de deplacer le redsquare
     def deplacerRedsquare(self, event):
+        self.parent.gameOn()
         self.canvas.delete(self.rouge)
         x = event.x
         y = event.y
-        self.redsquare.deplacer(x,y)
+        # Le - 25 c'est pour centrer la souris au carre
+        self.redsquare.deplacer(x-25,y-25)
         borneRedSquare = self.redsquare.getBornes()
-        self.rouge = self.canvas.create_rectangle(x-25,y-25,x+25,y+25, fill=self.redsquare.getCouleur())
+        self.rouge = self.rouge = self.canvas.create_rectangle(borneRedSquare.x,borneRedSquare.y,borneRedSquare.x+borneRedSquare.longueur,borneRedSquare.y+borneRedSquare.hauteur, fill=self.redsquare.getCouleur())
         self.canvas.update()
-    
-    ###Permet d'afficher les widgets du jeux et de packer les widgets   
-    def afficherFenetre(self):                   
-        self.canvas.place(in_=self.parent.fenPrincipale, anchor="c", relx=.4, rely=.4)
         
     ###Permet d'afficher les widgets du jeux et de packer les widgets   
-    def afficherFenetre(self):                   
+    def afficherCarte(self):                   
         self.canvas.place(in_=self.parent.fenPrincipale, anchor="c", relx=.4, rely=.4)
         self.dessinerRedsquare()
         self.dessinerFormes()
@@ -91,9 +87,9 @@ class RenduInterface():
         self.centrerFenetre()
         self.fenPrincipale.pack()
         self.fenBoutton.place(in_=self.fenPrincipale,relx=.1, rely=.8)
-        self.rcCarte.afficherFenetre()
+        self.rcCarte.afficherCarte()
         self.option.afficherBouton()
-        self.parent.update()
+        self.update()
         self.root.mainloop()
         
     ###Permet de centrer l'application au centre de l'ecran
@@ -112,10 +108,19 @@ class RenduInterface():
             self.reset()
     
     def reset(self):
+        self.alive = True
         self.parent.reset()
         self.formes = self.parent.niveau.getFormes()
         self.redsquare = self.parent.niveau.getRouge()
         self.rcCarte = RenduCarte(self, self.redsquare, self.formes)
+    
+    def gameOn(self):
+        self.parent.gameOn()
+        
+    def update(self):
+        self.parent.update()
+        self.rcCarte.afficherCarte()
+        self.root.after(20, self.update)
         
 if __name__ == '__main__':       
     j = controlleur.Jeu()
