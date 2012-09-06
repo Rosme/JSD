@@ -141,6 +141,7 @@ class Niveau():
         self.lvl = 1
         self.rouge = RedSquare()
         self.formes = list()
+        self.temps = Temps()
         self.nouveau()
     
     def getFormes(self):
@@ -156,6 +157,10 @@ class Niveau():
         self.formes.append(Formes(12, 300, 60, 40, "blue"))
         self.formes.append(Formes(275, 200, 80, 50, "blue"))
         self.formes.append(Formes(250, 20, 70, 30, "blue"))
+    
+    def getTemps(self):
+        return self.temps
+        
             
 class Carte():
     def __init__(self):

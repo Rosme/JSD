@@ -79,16 +79,17 @@ class RenduOption():
         
 class RenduInterface():
     
-    def __init__(self, parent, redsquare, formes):
+    def __init__(self, parent, niveau):
         self.root = Tk()
         self.root.title("RedSquare - Projet B41")
-        self.formes = formes
+        self.niveau = niveau
+        self.formes = self.niveau.getFormes()
         self.parent = parent
-        self.redsquare = redsquare
+        self.redsquare = self.niveau.getRouge()
         self.fenPrincipale=Frame(width=600, height=600, bd = 2, colormap="new", relief = 'groove', bg = "black")    #contient frame du jeux, bouton et eventuellement frame pour highscore
         self.fenBoutton=Frame(bd=2, colormap="new")
         self.fenTemps=Frame(width=100, height=25,colormap="new")
-        self.rcCarte = RenduCarte(self, redsquare, formes)
+        self.rcCarte = RenduCarte(self, self.redsquare, self.formes)
         self.option = RenduOption(self)
         self.alive = True
         
@@ -116,16 +117,19 @@ class RenduInterface():
             messagebox.showinfo("Vous etes mort!", "Oups! Vous etes mort!")
             self.alive = False
             self.reset()
+            self.niveau.getTemps().stop()
     
     def reset(self):
         self.alive = True
         self.parent.reset()
-        self.formes = self.parent.niveau.getFormes()
-        self.redsquare = self.parent.niveau.getRouge()
+        self.niveau = self.parent.niveau
+        self.formes = self.niveau.getFormes()
+        self.redsquare = self.niveau.getRouge()
         self.rcCarte = RenduCarte(self, self.redsquare, self.formes)
     
     def gameOn(self):
         self.parent.gameOn()
+        self.niveau.getTemps().start()
         
     def update(self):
         self.parent.update()

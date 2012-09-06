@@ -14,7 +14,7 @@ class Jeu():
         self.niveau = self.carte.getNiveau()
         self.gc = modele.GerantCollision()
         self.started = False
-        self.interface = vue.RenduInterface(self, self.niveau.getRouge(), self.niveau.getFormes())
+        self.interface = vue.RenduInterface(self, self.niveau)
     
     def run(self):
         self.interface.dessiner()
