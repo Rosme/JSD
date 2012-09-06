@@ -66,7 +66,9 @@ class RenduOption():
     ###Permet d'afficher le temps écoulé   
     def afficheTemps(self):
         temps = str(self.parent.niveau.getTemps().getTemps())
-        parent.canvasTemps.create_text(50,50,text=temps)
+        self.parent.canvasTemps.delete(ALL)
+        self.parent.canvasTemps.create_text(50,15,text="Temps: " + temps)
+        self.parent.canvasTemps.update()
 
     
     ###Affiche les informations si l'utilisateur clique sur le bouton informations. fonction de la command du boutton    
@@ -101,7 +103,6 @@ class RenduInterface():
         self.canvasTemps.place(in_=self.fenPrincipale,relx=.1, rely=.9)
         self.rcCarte.afficherCarte()
         self.option.afficherBouton()
-        self.option.afficheTemps()
         self.update()
         self.root.mainloop()
         
@@ -135,6 +136,7 @@ class RenduInterface():
         
     def update(self):
         self.parent.update()
+        self.option.afficheTemps()
         self.rcCarte.afficherCarte()
         self.root.after(20, self.update)
         

@@ -102,11 +102,14 @@ class Temps():
             
     #Retourne un string du nombre de secondes ecoule
     def getTemps(self):
-        if self.running:
+        if self.running == True:
             self.time = time.time() - self.timeStart
             return round(self.time, 2)
         else:
-            return round(self.time, 2)
+            if self.time == None:
+                return 0
+            else:
+                return round(self.time, 2)
         
 class GerantCollision():
     #Methode de verification pour les collisions entre formes
