@@ -2,9 +2,8 @@
 '''
 controlleur.py
 Fichier contenant les classes controlleur du Redsquare
-Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
+Projet par Jean-Sébastien Fauteux, Samuel Ryc et David Lebrun
 '''
-
 
 import modele
 import vue

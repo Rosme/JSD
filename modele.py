@@ -2,7 +2,7 @@
 '''
 modele.py
 Fichier contenant les classes modeles du RedSquare
-Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
+Projet par Jean-Sébastien Fauteux, Samuel Ryc et David Lebrun
 '''
 
 import random
