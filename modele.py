@@ -147,12 +147,9 @@ class Niveau():
         self.lvl = 1
         self.rouge = RedSquare()
         self.formes = list()
+        self.nouveau()
     
     def getFormes(self):
-        self.formes.append(Formes(10, 10, 50, 50, "blue"))
-        #self.formes.append(Formes(10, 300, 50, 50, "blue"))
-        #self.formes.append(Formes(300, 200, 50, 50, "blue"))
-        #self.formes.append(Formes(250, 20, 50, 50, "blue"))
         return self.formes
     
     def getRouge(self):
@@ -161,7 +158,10 @@ class Niveau():
     def nouveau(self):
         self.lvl += 1
         self.formes = list()
-        return getFormes()
+        self.formes.append(Formes(10, 10, 50, 50, "blue"))
+        self.formes.append(Formes(10, 300, 50, 50, "blue"))
+        self.formes.append(Formes(300, 200, 50, 50, "blue"))
+        self.formes.append(Formes(250, 20, 50, 50, "blue"))
             
 class Carte():
     def __init__(self):

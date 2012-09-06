@@ -25,6 +25,8 @@ class RenduCarte():
         for f in self.bleu:
             self.canvas.delete(f)
         
+        self.bleu[:] = []
+        
         for fo in self.formes:
             borne = fo.getBornes()
             self.bleu.append(self.canvas.create_rectangle(borne.x, borne.y, borne.x+borne.longueur, borne.y+borne.hauteur, fill=fo.getCouleur()))
