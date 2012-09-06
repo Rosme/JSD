@@ -11,8 +11,11 @@ class RenduCarte():
 
     def __init__(self, parent, redsquare, formes):
         self.parent = parent
-        self.redsquare = None
-        self.aireJeux=Canvas(width=450,height=370, bd=2, bg="white")            #contient le jeux
+        self.redsquare = redsquare
+        self.formes = formes
+        self.canvas=Canvas(width=450,height=370, bd=2, bg="white")            #contient le jeux
+        borneRedSquare = redsquare.getBornes()
+        self.rouge = self.canvas.create_rectangle(borneRedSquare.x,borneRedSquare.y,borneRedSquare.longueur,borneRedSquare.hauteur, fill=redsquare.getCouleur()) 
 
     ###Dessine les rectangles (ennemies) dans le canvas
     def dessinerFormes(self):
@@ -25,11 +28,24 @@ class RenduCarte():
     
     ###Dessinge le redsquare dans le canvas
     def dessinerRedsquare(self):
-        self.aireJeux.create_rectangle(200,150,250,200, fill="red") 
+        self.canvas.create_rectangle(200,150,250,200, fill="red")
+        self.canvas.bind("<B1-Motion>", self.deplacerRedsquare)
+    
+        ###Permet de deplacer le redsquare
+    def deplacerRedsquare(self, event):
+        self.canvas.delete(self.redsquare)
+        x = event.x
+        y = event.y
+        self.redsquare = self.canvas.create_rectangle(x-25,y-25,x+25,y+25, fill = "red")
+        self.canvas.update()
     
     ###Permet d'afficher les widgets du jeux et de packer les widgets   
     def afficherFenetre(self):                   
-        self.aireJeux.place(in_=self.parent.fenPrincipale, anchor="c", relx=.4, rely=.4)
+        self.canvas.place(in_=self.parent.fenPrincipale, anchor="c", relx=.4, rely=.4)
+        
+    ###Permet d'afficher les widgets du jeux et de packer les widgets   
+    def afficherFenetre(self):                   
+        self.canvas.place(in_=parent.fenPrincipale, anchor="c", relx=.4, rely=.4)
         self.dessinerFormes()
         self.dessinerRedsquare()
         
@@ -42,7 +58,7 @@ class RenduOption():
     
     ###Affiche les informations si l'utilisateur clique sur le bouton informations. fonction de la command du boutton    
     def afficherInfo(self):
-        messagebox.showinfo("Informations", "Developpe par :\nJean-Sebatien Fauteux\nSamuel Ryc\nDavid Lebrun")
+        messagebox.showinfo("Informations", "Developpe par :\n\nJean-Sebatien Fauteux\n\nSamuel Ryc\n\nDavid Lebrun")
         
     ###Affiche les bouton a partir de afficherFenetre dans RenduCarte()
     def afficherBouton(self):

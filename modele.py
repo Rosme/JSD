@@ -77,7 +77,7 @@ class Formes():
                 
 class RedSquare():
     def __init__(self):
-        self.bornesRS = Bornes(100, 100, 20, 20)
+        self.bornesRS = Bornes(200, 150, 250, 200)
         self.couleur = "red"      
         
     def getBornes(self):
