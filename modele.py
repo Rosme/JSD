@@ -78,7 +78,7 @@ class Formes():
 class RedSquare():
     def __init__(self):
         self.bornesRS = Bornes(100, 100, 20, 20)
-        self.couleur = "RED"      
+        self.couleur = "red"      
         
     def getBornes(self):
         return self.bornesRS
@@ -143,3 +143,20 @@ class GerantCollision():
         if bornesA.y+bornesA.hauteur >= bornesB.y+bornesB.hauteur: #On est sorti en bas
             return True
         return False # On est toujours a l'interieur
+
+class Niveau():
+    def __init__(self):
+        self.lvl = 1
+        self.rouge = RedSquare()
+        self.formes = list()
+    
+    def getFormes(self):
+        for i in range(4):
+            self.formes.append(Formes(randint(10,375), randint(10, 300), randint(50,300), randint(50, 300), "blue"))
+        return self.formes()
+    
+    def nouveau(self):
+        self.lvl += 1
+        self.formes = list()
+        return getFormes()
+            

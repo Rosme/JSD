@@ -9,20 +9,23 @@ from tkinter import messagebox
 
 class RenduCarte():
 
-    def __init__(self, parent):
+    def __init__(self, parent, redsquare, formes):
         self.parent = parent
+        self.redsquare = None
         self.aireJeux=Canvas(width=450,height=370, bd=2, bg="white")            #contient le jeux
 
     ###Dessine les rectangles (ennemies) dans le canvas
     def dessinerFormes(self):
+        '''
         self.rectangleHautGauche = self.aireJeux.create_rectangle(10,10,60,125, fill="blue")
         self.rectangleBasGauche = self.aireJeux.create_rectangle(10,300,150,350, fill="blue")
         self.rectangleBasDroite = self.aireJeux.create_rectangle(390,350,440,200, fill="blue")
         self.rectangleHautDroite = self.aireJeux.create_rectangle(250,20,440,70, fill="blue")
+        '''
     
     ###Dessinge le redsquare dans le canvas
     def dessinerRedsquare(self):
-        self.redsquare = self.aireJeux.create_rectangle(200,150,250,200, fill="red") 
+        self.aireJeux.create_rectangle(200,150,250,200, fill="red") 
     
     ###Permet d'afficher les widgets du jeux et de packer les widgets   
     def afficherFenetre(self):                   
@@ -63,6 +66,10 @@ class RenduInterface():
         self.carte.afficherFenetre()
         self.option.afficherBouton()    
         self.root.mainloop()
+    
+    def setData(self, redsquare, formes):
+        self.carte.redsquare = redsquare
+        self.carte.formes = formes
         
     ###Permet de centrer l'application au centre de l'ecran
     def centrerFenetre(self,w=600, h=500):              
