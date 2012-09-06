@@ -56,8 +56,8 @@ class Formes():
         self.bornesFig.x += self.movementSpeedX
         self.bornesFig.y += self.movementSpeedY
     
-    def accellerer(self):
-        acc = randint(1,3)
+    def accelerer(self):
+        acc = random.randint(1,10)
         if self.directionX == 0:
             self.movementSpeedX -= acc
         else:
@@ -110,7 +110,10 @@ class Temps():
                 return 0
             else:
                 return round(self.time, 2)
-        
+    
+    def restart(self):
+        self.timeStart = time.time()
+    
 class GerantCollision():
     #Methode de verification pour les collisions entre formes
     def collisionForme(self, bornesA, bornesB):
@@ -164,6 +167,9 @@ class Niveau():
     def getTemps(self):
         return self.temps
         
+    def boost(self):
+        for f in self.formes:
+            f.accelerer()
             
 class Carte():
     def __init__(self):
