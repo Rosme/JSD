@@ -99,22 +99,22 @@ class Temps():
     #Demarre le temps
     def start(self):
         if self.running == False:
-            self.timeStart = datetime.datetime.now()
+            self.timeStart = time.time()
             self.running = True
     
     #Arrete le temps
     def stop(self):
         if self.running:
-            self.time = datetime.datetime.now() - self.timeStart
+            self.time = time.time() - self.timeStart
             self.running = False
             
     #Retourne un string du nombre de secondes ecoule
     def getTemps(self):
         if self.running:
-            self.time = datetime.datetime.now() - self.timeStart
-            return str(self.time.seconds)
+            self.time = time.time() - self.timeStart
+            return str(round(self.time, 2))
         else:
-            return str(self.time.seconds)
+            return str(round(self.time, 2))
         
 class GerantCollision():
     #Methode de verification pour les collisions entre formes
@@ -143,4 +143,3 @@ class GerantCollision():
         if bornesA.y+bornesA.hauteur >= bornesB.y+bornesB.hauteur: #On est sorti en bas
             return True
         return False # On est toujours a l'interieur
-        
