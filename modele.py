@@ -3,6 +3,7 @@ modele.py
 Fichier contenant les classes modeles du RedSquare
 Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
 '''
+##-*- coding: ISO-8859-1 -*-
 import random
 import time
 import datetime
