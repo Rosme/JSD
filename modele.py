@@ -31,6 +31,12 @@ class Formes():
            idem pour y                            '''
         self.directionX = random.randrange(2) #methodes random: retourne soit 0 ou 1
         self.directionY = random.randrange(2)
+        self.movementSpeedX = 7
+        self.movementSpeedY = 7
+        if self.directionX == 0:
+            self.movementSpeedX *= -1
+        if self.directionY == 0:
+            self.movementSpeedY *= -1
         
     def getBornes(self):
         return self.bornesFig
@@ -39,40 +45,44 @@ class Formes():
         return self.couleur
         
     def mouvement(self):
-        # !!! les vitesses de deplacement sont a modifier !!! 
-        self.movementSpeedX = 10
-        self.movementSpeedY = 10
-        
         self.interfaceDimension = 375 #j'assume que notre interface de jeu est de 375x375
-        
+        '''
         #directionX == 0 donc -x deplacement a gauche
         if(self.directionX == 0):
-            if(self.x <= 0):                      #verification si la figure n'est pas sur le cote gauche du cadre (0,y)
+            if(self.bornesFig.x <= 1):                      #verification si la figure n'est pas sur le cote gauche du cadre (0,y)
                 directionX = 1                    #si oui, changement de direction de -x a +x 
             else:                                 #sinon pas a gauche du cadre
                 self.bornesFig.x -= self.movementSpeedX     #continue de deplacer a gauche
         
         #directionX == 1 donc +x deplacement vers la droite
         elif(self.directionX == 1):
-            if((self.x+self.longueur) >= self.interfaceDimension): 
+            if((self.bornesFig.x+self.longueur) >= self.interfaceDimension-1): 
                 directionX = 0
             else:
                 self.bornesFig.x += self.movementSpeedX
         
         #directionY == 0 donc  -y deplacement vers le bas
         if(self.directionY == 0):
-            if(self.y <= 0):
+            if(self.bornesFig.y <= 1):
                 directionY = 1
             else:
                 self.bornesFig.y -= self.movementSpeedY
                 
         #directionY == 1 donc +y deplacement vers le haut
         elif(self.directionY == 1):
-            if((self.y+self.hauteur) >= self.interfaceDimension):
+            if((self.bornesFig.y+self.hauteur) >= self.interfaceDimension-1):
                 directionY = 0
             else:
-                self.bornesFig.y += self.movementSpeedY
-                
+                self.bornesFig.y += self.movementSpeedY'''
+        
+        if self.bornesFig.x <= 0 or self.bornesFig.x >= self.interfaceDimension:
+            self.movementSpeedX *= -1
+        if self.bornesFig.y <= 0 or self.bornesFig.y >= self.interfaceDimension:
+            self.movementSpeedY *= -1
+        
+        self.bornesFig.x += self.movementSpeedX
+        self.bornesFig.y += self.movementSpeedY
+        
 class RedSquare():
     def __init__(self):
         self.bornesRS = Bornes(200, 150, 50, 50)

@@ -25,9 +25,9 @@ class Jeu():
                 self.interface.gameOver()
         
             for forme in self.niveau.getFormes():
-                forme.mouvement()
                 if self.gc.collisionForme(self.niveau.getRouge().getBornes(), forme.getBornes()):
                     self.interface.gameOver()
+                forme.mouvement()
     
     def reset(self):
         self.carte = modele.Carte()
