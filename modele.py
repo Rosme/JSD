@@ -57,7 +57,19 @@ class Formes():
         self.bornesFig.y += self.movementSpeedY
     
     def accelerer(self):
-        acc = random.randint(1,10)
+        acc = random.randint(1,5)
+        if self.movementSpeedX < 0:
+            self.movementSpeedX -= acc
+        else:
+            self.movementSpeedX += acc
+            
+        if self.movementSpeedY < 0:
+            self.movementSpeedY -= acc
+        else:
+            self.movementSpeedY += acc
+            
+        '''
+        #Direction aléatoire et vitesse aléatoire
         if self.directionX == 0:
             self.movementSpeedX -= acc
         else:
@@ -66,6 +78,7 @@ class Formes():
             self.movementSpeedY -= acc
         else:
             self.movementSpeedY += acc
+        '''
         
 class RedSquare():
     def __init__(self):
