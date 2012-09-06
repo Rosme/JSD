@@ -1,9 +1,9 @@
+#-*- coding: utf-8 -*-
 '''
 vue.py
 Fichier contenant les classes vue du Redsquare
 Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
 '''
-##-*- coding: ISO-8859-1 -*-
 from tkinter import *
 from tkinter import messagebox
 
@@ -64,7 +64,7 @@ class RenduOption():
     
     ###Affiche les informations si l'utilisateur clique sur le bouton informations. fonction de la command du boutton    
     def afficherInfo(self):
-        messagebox.showinfo("Informations", "Developpe par :\n\nJean-Sebatien Fauteux\n\nSamuel Ryc\n\nDavid Lebrun")
+        messagebox.showinfo("Informations", "Développé par :\n\nJean-Sébastien Fauteux\n\nSamuel Ryc\n\nDavid Lebrun")
         
     ###Affiche les bouton a partir de afficherFenetre dans RenduCarte()
     def afficherBouton(self):

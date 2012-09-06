@@ -1,9 +1,10 @@
+#-*- coding: utf-8 -*-
 '''
 modele.py
 Fichier contenant les classes modeles du RedSquare
 Projet par Jean-Sebastien Fauteux, Samuel Ryc et David Lebrun
 '''
-##-*- coding: ISO-8859-1 -*-
+
 import random
 import time
 import random as rd
@@ -31,8 +32,8 @@ class Formes():
            idem pour y                            '''
         self.directionX = random.randrange(2) #methodes random: retourne soit 0 ou 1
         self.directionY = random.randrange(2)
-        self.movementSpeedX = 7
-        self.movementSpeedY = 7
+        self.movementSpeedX = 5
+        self.movementSpeedY = 5
         if self.directionX == 0:
             self.movementSpeedX *= -1
         if self.directionY == 0:
@@ -46,42 +47,25 @@ class Formes():
         
     def mouvement(self):
         self.interfaceDimension = 375 #j'assume que notre interface de jeu est de 375x375
-        '''
-        #directionX == 0 donc -x deplacement a gauche
-        if(self.directionX == 0):
-            if(self.bornesFig.x <= 1):                      #verification si la figure n'est pas sur le cote gauche du cadre (0,y)
-                directionX = 1                    #si oui, changement de direction de -x a +x 
-            else:                                 #sinon pas a gauche du cadre
-                self.bornesFig.x -= self.movementSpeedX     #continue de deplacer a gauche
         
-        #directionX == 1 donc +x deplacement vers la droite
-        elif(self.directionX == 1):
-            if((self.bornesFig.x+self.longueur) >= self.interfaceDimension-1): 
-                directionX = 0
-            else:
-                self.bornesFig.x += self.movementSpeedX
-        
-        #directionY == 0 donc  -y deplacement vers le bas
-        if(self.directionY == 0):
-            if(self.bornesFig.y <= 1):
-                directionY = 1
-            else:
-                self.bornesFig.y -= self.movementSpeedY
-                
-        #directionY == 1 donc +y deplacement vers le haut
-        elif(self.directionY == 1):
-            if((self.bornesFig.y+self.hauteur) >= self.interfaceDimension-1):
-                directionY = 0
-            else:
-                self.bornesFig.y += self.movementSpeedY'''
-        
-        if self.bornesFig.x <= 0 or self.bornesFig.x >= self.interfaceDimension:
+        if self.bornesFig.x <= 0 or self.bornesFig.x+self.bornesFig.longueur >= self.interfaceDimension:
             self.movementSpeedX *= -1
-        if self.bornesFig.y <= 0 or self.bornesFig.y >= self.interfaceDimension:
+        if self.bornesFig.y <= 0 or self.bornesFig.y+self.bornesFig.hauteur >= self.interfaceDimension:
             self.movementSpeedY *= -1
         
         self.bornesFig.x += self.movementSpeedX
         self.bornesFig.y += self.movementSpeedY
+    
+    def accellerer(self):
+        acc = randint(1,3)
+        if self.directionX == 0:
+            self.movementSpeedX -= acc
+        else:
+            self.movementSpeedX += acc
+        if self.directionY == 0:
+            self.movementSpeedY -= acc
+        else:
+            self.movementSpeedY += acc
         
 class RedSquare():
     def __init__(self):
@@ -120,9 +104,9 @@ class Temps():
     def getTemps(self):
         if self.running:
             self.time = time.time() - self.timeStart
-            return str(round(self.time, 2))
+            return round(self.time, 2)
         else:
-            return str(round(self.time, 2))
+            return round(self.time, 2)
         
 class GerantCollision():
     #Methode de verification pour les collisions entre formes
@@ -168,10 +152,10 @@ class Niveau():
     def nouveau(self):
         self.lvl += 1
         self.formes = list()
-        self.formes.append(Formes(10, 10, 50, 50, "blue"))
-        self.formes.append(Formes(10, 300, 50, 50, "blue"))
-        self.formes.append(Formes(300, 200, 50, 50, "blue"))
-        self.formes.append(Formes(250, 20, 50, 50, "blue"))
+        self.formes.append(Formes(14, 12, 50, 70, "blue"))
+        self.formes.append(Formes(12, 300, 60, 40, "blue"))
+        self.formes.append(Formes(275, 200, 80, 50, "blue"))
+        self.formes.append(Formes(250, 20, 70, 30, "blue"))
             
 class Carte():
     def __init__(self):
