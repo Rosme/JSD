@@ -67,6 +67,9 @@ class Formes():
             self.movementSpeedY -= acc
         else:
             self.movementSpeedY += acc
+        
+        self.bornesFig.longueur += random.randint(-10, 10)
+        self.bornesFig.hauteur += random.randint(-10, 10)
             
         '''
         #Direction aléatoire et vitesse aléatoire
@@ -82,7 +85,7 @@ class Formes():
         
 class RedSquare():
     def __init__(self):
-        self.bornesRS = Bornes(200, 150, 50, 50)
+        self.bornesRS = Bornes(200, 150, 25, 25)
         self.couleur = "red"      
         
     def getBornes(self):
@@ -172,10 +175,10 @@ class Niveau():
     def nouveau(self):
         self.lvl += 1
         self.formes = list()
-        self.formes.append(Formes(14, 12, 50, 70, "blue"))
-        self.formes.append(Formes(12, 300, 60, 40, "blue"))
-        self.formes.append(Formes(275, 200, 80, 50, "blue"))
-        self.formes.append(Formes(250, 20, 70, 30, "blue"))
+        self.formes.append(Formes(14, 12, random.randint(10,80), random.randint(10,70), "blue"))
+        self.formes.append(Formes(12, 300, random.randint(10,80), random.randint(10,70), "blue"))
+        self.formes.append(Formes(275, 200, random.randint(10,80), random.randint(10,70), "blue"))
+        self.formes.append(Formes(250, 20, random.randint(10,80), random.randint(10,70), "blue"))
     
     def getTemps(self):
         return self.temps

@@ -45,7 +45,7 @@ class RenduCarte():
         x = event.x
         y = event.y
         # Le - 25 c'est pour centrer la souris au carre
-        self.redsquare.deplacer(x-25,y-25)
+        self.redsquare.deplacer(x-12,y-12)
         borneRedSquare = self.redsquare.getBornes()
         self.rouge = self.rouge = self.canvas.create_rectangle(borneRedSquare.x,borneRedSquare.y,borneRedSquare.x+borneRedSquare.longueur,borneRedSquare.y+borneRedSquare.hauteur, fill=self.redsquare.getCouleur())
         self.canvas.update()
